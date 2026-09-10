@@ -1,3 +1,4 @@
+using API.Exceptions;
 using Application;
 using InfraStructure;
 
@@ -12,6 +13,7 @@ public class Program
         // Infrastructure
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddApplication();
+        
 
         // Controllers
         builder.Services.AddControllers();
@@ -25,7 +27,7 @@ public class Program
         builder.Services.AddAuthorization();
 
         var app = builder.Build();
-
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
         // Swagger
         if (app.Environment.IsDevelopment())
         {

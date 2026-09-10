@@ -12,9 +12,19 @@ public class CreateOrderCommandHandler(IUnitOfWork unitOfWork)
     {
        // items not null
        if (request.Items.Count == 0)
+       {
            throw new InvalidOperationException("Order must contain at least one item");
+       }
+              var customer = await unitOfWork.CustomerRepository
+             .GetByIdAsync(request.CustomerId , cancellationToken);
 
-       var items = request.Items
+              if (customer is null)
+              {
+                  throw new InvalidOperationException(
+                      $"Customer with id {request.CustomerId} was not found.");
+              }
+
+              var items = request.Items
            .Select(x => new OrderItem()
             {
              ProductId = x.ProductId,

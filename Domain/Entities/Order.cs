@@ -19,9 +19,11 @@ public class Order :BaseEntity<Guid>
 
     public static Order Create(int customerId, List<OrderItem> items)
     {
+        
         if (items is null || items.Count == 0)
             throw new DomainException("Order must contain at least one item");
 
+         
         foreach (var item in items)
         {
             if (string.IsNullOrWhiteSpace(item.ProductName))
