@@ -29,6 +29,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICacheRepository, CacheRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }
 

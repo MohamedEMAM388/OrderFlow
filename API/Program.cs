@@ -1,5 +1,5 @@
+using Application;
 using InfraStructure;
-using Microsoft.AspNetCore.Authentication.Negotiate;
 
 namespace API;
 
@@ -9,32 +9,36 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        // Infrastructure
         builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services.AddApplication();
 
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-        builder.Services.AddOpenApi();
+        // Controllers
+        builder.Services.AddControllers();
 
-        builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-            .AddNegotiate();
+        // Swagger
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
-        builder.Services.AddAuthorization(options =>
-        {
-            // By default, all incoming requests will be authorized according to the default policy.
-            options.FallbackPolicy = options.DefaultPolicy;
-        });
+        // Authentication & Authorization
+        builder.Services.AddAuthentication();
+        builder.Services.AddAuthorization();
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
+        // Swagger
         if (app.Environment.IsDevelopment())
         {
-            app.MapOpenApi();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
 
         app.UseHttpsRedirection();
 
+        app.UseAuthentication();
         app.UseAuthorization();
+
+        app.MapControllers();
 
         app.Run();
     }

@@ -11,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Orders\Commands\Create\" />
       <Folder Include="Features\Orders\Queries\GetOrderById\" />
       <Folder Include="Features\Orders\Queries\GetOrdersDashboard\" />
       <Folder Include="Features\Orders\Queries\GetOrders\" />
