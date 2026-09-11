@@ -47,5 +47,14 @@ public class Order :BaseEntity<Guid>
         };
     }
 
+    public void MarkAsCompleted()
+    {
+        if (OrderStatus != Enums.OrderStatus.Pending)
+            throw new InvalidOperationException(
+                $"Cannot complete order with status {OrderStatus}");
+        
+        OrderStatus = OrderStatus.Completed;
+    }
+
 }
 

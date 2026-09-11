@@ -1,4 +1,5 @@
 using Application.Contracts;
+using InfraStructure.BackgroundServices;
 using InfraStructure.Caching;
 using InfraStructure.Persistence.Data;
 using InfraStructure.Repositories;
@@ -34,6 +35,11 @@ public static class DependencyInjection
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICacheService, CacheService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        // background service
+        
+        services.AddScoped<IOrderProcessingService, OrderProcessingService>();
+        services.AddHostedService<OrderProcessingBackgroundService>();
         
         return services;
     }
