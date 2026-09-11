@@ -12,5 +12,5 @@ public interface IOrderRepository
 
     Task<IEnumerable<OrderDashboard>> GetPendingOrdersAsync(CancellationToken cancellationToken = default);
 
-    Task UpdateAsync(Order order, CancellationToken cancellationToken = default);
+    void UpdateAsync(Order order);
 }

@@ -20,7 +20,7 @@ public class CreateOrderCommandHandler(IUnitOfWork unitOfWork)
         }
 
         var requestedProductIds = request.Items
-            .Select(x => x.ProductId).Distinct().ToList();
+            .Select(x => x.ProductId).ToList();
         var existingProducts = await unitOfWork.ProductRepository
             .GetByIdsAsync(requestedProductIds, cancellationToken);
 

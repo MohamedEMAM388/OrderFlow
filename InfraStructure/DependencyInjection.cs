@@ -1,4 +1,5 @@
 using Application.Contracts;
+using InfraStructure.Caching;
 using InfraStructure.Persistence.Data;
 using InfraStructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,9 @@ public static class DependencyInjection
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICacheService, CacheService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
         return services;
     }
 

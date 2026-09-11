@@ -32,9 +32,9 @@ public class OrderRepository(AppDbContext context) : IOrderRepository
             .ToListAsync(cancellationToken);
     }
 
-    public  Task UpdateAsync(Order order, CancellationToken cancellationToken = default)
+    public  void UpdateAsync(Order order)
     {
          context.Orders.Update(order);
-         return Task.CompletedTask;
+    
     }
 }
