@@ -50,7 +50,7 @@ public class RedisCacheAttribute : ActionFilterAttribute
     private static string CreateCacheKey(HttpRequest request)
     {
         var key = new StringBuilder();
-        key.Append(request.Path);
+        key.Append(request.Path.Value!.ToLowerInvariant());
 
         foreach (var item in request.Query.OrderBy(x => x.Key))
         {

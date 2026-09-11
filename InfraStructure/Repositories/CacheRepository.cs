@@ -50,5 +50,20 @@ public class CacheRepository : ICacheRepository
             _logger.LogError(ex, "Unexpected error while setting key {Key}", key);
         }
     }
-    
+
+    public async Task RemoveAsync(string key, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await _database.KeyDeleteAsync(key);
+        }
+        catch (RedisConnectionException ex)
+        {
+            _logger.LogError(ex, "Redis connection failed while removing key {Key}", key);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error while removing key {Key}", key);
+        }
+    }
 }

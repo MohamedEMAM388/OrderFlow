@@ -33,7 +33,7 @@ public class OrderProcessingBackgroundService(
         }
         catch (OperationCanceledException ex)
         {
-            logger.LogError(ex, "Order Processing Service cancelled");
+            logger.LogInformation(ex, "Order Processing Service cancelled");
         }
         
     }

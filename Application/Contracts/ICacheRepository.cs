@@ -7,4 +7,7 @@ public interface ICacheRepository
     
     // set data in cache
     public Task SetDataAsync(string key, string data , TimeSpan ttl , CancellationToken cancellationToken = default);
+    
+    Task RemoveAsync(string key, CancellationToken cancellationToken = default);
+
 }

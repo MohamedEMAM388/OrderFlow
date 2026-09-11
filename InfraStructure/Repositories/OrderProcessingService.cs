@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InfraStructure.Repositories;
 
-public class OrderProcessingService(AppDbContext context) : IOrderProcessingService
+public class OrderProcessingService(AppDbContext context , 
+    ICacheService cacheService) : IOrderProcessingService
 {
     public async Task ProcessPendingOrdersAsync(CancellationToken cancellationToken = default)
     {
@@ -19,5 +20,10 @@ public class OrderProcessingService(AppDbContext context) : IOrderProcessingServ
         
         if(pendingOrders.Count > 0)
             await context.SaveChangesAsync(cancellationToken);
+
+        foreach (var order in pendingOrders)
+        {
+            await cacheService.RemoveDataAsync($"/api/order/{order.Id}".ToLowerInvariant());
+        }
     }
 }

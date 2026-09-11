@@ -7,4 +7,6 @@ public interface ICacheService
 
     // set data in cache
     Task SetDataAsync(string cacheKey, object cacheValue, TimeSpan timeToLive);
+    
+    Task RemoveDataAsync(string cacheKey);
 }

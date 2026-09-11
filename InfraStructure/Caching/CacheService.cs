@@ -16,4 +16,9 @@ public class CacheService(ICacheRepository cacheRepository) : ICacheService
         var cacheData = JsonSerializer.Serialize(cacheValue);
         return cacheRepository.SetDataAsync(cacheKey, cacheData, timeToLive);
     }
+
+    public Task RemoveDataAsync(string cacheKey)
+    {
+        return cacheRepository.RemoveAsync(cacheKey);
+    }
 }
