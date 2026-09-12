@@ -1,8 +1,8 @@
 using API.Attributes;
 using Application.Features.Orders.Commands.CreateOrder;
 using Application.Features.Orders.Queries.GetOrderById;
+using Application.Features.Orders.Queries.GetOrders;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -26,6 +26,14 @@ namespace API.Controllers
             var query = new GetOrderByIdQuery(id);
             var result = await mediator.Send(query, cancellationToken);
 
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrders(CancellationToken cancellationToken)
+        {
+            var result = await mediator.Send(new GetOrdersQuery()
+                                                 ,cancellationToken);
             return Ok(result);
         }
     }

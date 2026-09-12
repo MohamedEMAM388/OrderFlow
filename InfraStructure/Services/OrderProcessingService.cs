@@ -3,7 +3,7 @@ using Domain.Entities.Enums;
 using InfraStructure.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace InfraStructure.Repositories;
+namespace InfraStructure.Services;
 
 public class OrderProcessingService(AppDbContext context , 
     ICacheService cacheService) : IOrderProcessingService

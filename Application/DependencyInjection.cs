@@ -16,11 +16,8 @@ public static class DependencyInjection
         
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddValidatorsFromAssembly(typeof(CreateOrderCommandValidator).Assembly);
-        services.AddAutoMapper(cfg =>
-        {
-            cfg.AddProfile<GetOrderProfile>();
-        });
-        
+        services.AddAutoMapper(cfg => { }
+                   , typeof(DependencyInjection).Assembly);
         return services;
     }
 }

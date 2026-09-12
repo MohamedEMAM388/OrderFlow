@@ -37,4 +37,9 @@ public class OrderRepository(AppDbContext context) : IOrderRepository
          context.Orders.Update(order);
     
     }
+
+    public async Task<IEnumerable<OrderDashboard>> GetDashboardAsync(CancellationToken cancellationToken = default)
+    {
+        return await context.OrderDashboards.AsNoTracking().ToListAsync(cancellationToken);
+    }
 }

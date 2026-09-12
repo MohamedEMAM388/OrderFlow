@@ -3,6 +3,7 @@ using InfraStructure.BackgroundServices;
 using InfraStructure.Caching;
 using InfraStructure.Persistence.Data;
 using InfraStructure.Repositories;
+using InfraStructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,8 @@ public static class DependencyInjection
         
         services.AddScoped<IOrderProcessingService, OrderProcessingService>();
         services.AddHostedService<OrderProcessingBackgroundService>();
+        services.AddScoped<IDashboardRefreshService, DashboardRefreshService>();
+        services.AddHostedService<DashboardRefreshBackgroundService>();
         
         return services;
     }
